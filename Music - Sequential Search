@@ -1,0 +1,159 @@
+
+/**
+ * Purpose: Class for songs, which will be used to create several
+ * sequential search methods
+ *
+ * Brian Snyder
+ * 3/12/18
+ *
+ */
+public class Music
+{
+    // instance variables
+    private int year;
+    private String title;
+    private String artist;
+
+    // Constructor for objects of class Music
+    public Music(String t, int y, String a)
+    {
+        // initialize instance variables
+        title = t;
+        year = y;
+        artist = a;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+   
+    public void setTitle(String t)
+    {
+        title = t;
+    }
+   
+    public String getArtist()
+    {
+        return artist;
+    }
+    
+    public void setArtist(String a)
+    {
+        artist = a;
+    }
+   
+    public int getYear()
+    {
+        return year;
+    }
+    
+    public void setTitle(int y)
+    {
+        year = y;
+    }
+   
+    public String toString()
+    {
+        String str = String.format( "%-25s %4d   %-20s ", title,  year , artist);
+        return str;
+    }
+}
+
+
+/**
+ * Tester class for Music class
+ *
+ * Brian Snyder
+ * 3/12/18
+ */
+public class MusicTesterV1 {
+    public static void main(String args[]) {
+        // declares array
+        Music[] songs = new Music[10];
+        // initializes objects for array
+        songs[0] = new Music("God's Plan", 2018, "Drake");
+        songs[1] = new Music("Havana", 2018, "Camila Cabello");
+        songs[2] = new Music("Say Something", 2018, "Justin Timberlake");
+        songs[3] = new Music("Five more Minutes", 2018, "Scotty McCreery");
+        songs[4] = new Music("The Champion", 2018, "Carrie Underwood");
+        songs[5] = new Music("HUMBLE", 2017, "Kendric Lamar");
+        songs[6] = new Music("Shape of You", 2017, "Ed Sherran");
+        songs[7] = new Music("Despacito", 2017, "Luis Fonsi");
+        songs[8] = new Music("Thunder", 2016, "Imagine Dragons");
+        songs[9] = new Music("Can't Stop the Feeling!", 2016, "Justin Timberlake");
+        // prints all the songs
+        System.out.println("Songs:\n");
+        System.out.printf("%-25s %-6s %-20s%n", "Title", "Year", "Artist");
+        System.out.println("------------------------------------------------");
+        printSongs(songs);
+        // displays results for search of a title
+        System.out.println("\nSearching for Havana:");
+        findTitle(songs, "Havana");
+        // displays results for when a title is not found
+        System.out.println("\nSearching for Hello");
+        findTitle(songs, "Hello");
+        // displays results for search of a year
+        System.out.println("\nSearching for 2017 songs:");
+        findYear(songs, 2017);
+        // displays results for when a year is not found
+        System.out.println("\nSearching for 2015 songs:");
+        findYear(songs, 2015);
+        // displays results for search of a artist
+        System.out.println("\nSearching for Justin Timberlake:");
+        findArtist(songs, "Justin Timberlake");
+        // displays results for when an artist is not found
+        System.out.println("\nSearhcing for Adele");
+        findArtist(songs, "Adele");
+    }
+    // method that prints all songs
+    public static void printSongs(Music[] songs) {
+        for (int i = 0; i < songs.length; i++) {
+            System.out.println(songs[i]);
+        }
+    }
+    // method that searches for a title
+    public static void findTitle(Music[] songs, String toFind) {
+        int found = -1;
+        for (int i = 0; i < songs.length; i++) {
+            if (songs[i].getTitle().compareTo(toFind) == 0) {
+                found = i;
+                break; // terminates array once title is found
+            }
+        }
+        if (found != -1) {
+            System.out.println("We found " + toFind + " in the roster: ");
+            System.out.println(songs[found]);
+        } else {
+            System.out.println(toFind + " is not in the roster");
+        }
+    }
+    // method that searches for a year
+    public static void findYear(Music[] songs, int toFind) {
+        int found = 0;
+        System.out.println("Results: ");
+        for (int i = 0; i < songs.length; i++) {
+            if (songs[i].getYear() == toFind) {
+                System.out.println(songs[i]);
+                found++; // array doesn't terminate and continues
+            }
+        }
+        if (found == 0) {
+            System.out.println(toFind + " is not in the roster");
+        }
+    }
+    // method that searches for an artist
+    public static void findArtist(Music[] songs, String toFind) {
+        int found = 0;
+        System.out.println("Results: ");
+        for (int i = 0; i < songs.length; i++) {
+            if (songs[i].getArtist().compareTo(toFind) == 0) {
+                System.out.println(songs[i]);
+                found++; // array doesn't terminate and continues
+            }
+        }
+        if (found == 0) {
+            System.out.println(toFind + " is not in the roster");
+        }
+    }
+}
